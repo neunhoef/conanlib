@@ -19,7 +19,7 @@ class ConanlibConan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder=".")
+        cmake.configure(source_folder="conanlib")
         cmake.build()
 
         # Explicit way:

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "conanlib.h"
+#include <conanlib.h>
 
 int main(int argc, char* argv[]) {
   std::cout << "Hello world!" << std::endl;
