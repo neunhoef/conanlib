@@ -1,0 +1,1 @@
+int conanfunc(int a);
