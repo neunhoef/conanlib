@@ -28,13 +28,11 @@ class ConanlibConan(ConanFile):
         # self.run("cmake --build . %s" % cmake.build_config)
 
     def package(self):
-        self.copy("*.h", dst=".", src=".")
-        self.copy("*.lib", dst="lib", keep_path=False)
-        self.copy("*.dll", dst="bin", keep_path=False)
-        self.copy("*.so", dst="lib", keep_path=False)
-        self.copy("*.dylib", dst="lib", keep_path=False)
-        self.copy("*.a", dst="lib", keep_path=False)
+        cmake = CMake(self)
+        cmake.configure(source_folder="conanlib")
+        cmake.install()
 
     def package_info(self):
-        self.cpp_info.libs = ["conanlib"]
-
+        self.cpp_info.libs = [ "conanlib" ]
+        self.cpp_info.names["cmake_find_package"] = "conanlib"
+        self.cpp_info.names["cmake_find_package_multi"] = "arango"
