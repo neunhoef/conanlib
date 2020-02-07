@@ -9,7 +9,7 @@ add_executable(example example.cpp)
 
 message(INFO "conan libs ${CONAN_LIBS}")
 target_link_libraries(example ${CONAN_LIBS})
-target_include_directories(example ${CONAN_INCLUDES})
+target_include_directories(example PUBLIC ${CONAN_INCLUDES})
 
 # CTest is a testing tool that can be used to test your project.
 # enable_testing()
