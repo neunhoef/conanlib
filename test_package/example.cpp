@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include <conanlib.h>
 
 int main(int argc, char* argv[]) {

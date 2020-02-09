@@ -13,26 +13,22 @@ class ConanlibConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = {"shared": False}
     generators = "cmake"
+    exports_sources = "*"
 
-    def source(self):
-        self.run("git clone https://github.com/neunhoef/conanlib.git")
+    #def source(self):
+    #    self.run("git clone https://github.com/neunhoef/conanlib.git")
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="conanlib")
+        cmake.configure(source_folder=".")
         cmake.build()
-
-        # Explicit way:
-        # self.run('cmake %s/hello %s'
-        #          % (self.source_folder, cmake.command_line))
-        # self.run("cmake --build . %s" % cmake.build_config)
 
     def package(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="conanlib")
+        cmake.configure(source_folder=".")
         cmake.install()
 
     def package_info(self):
         self.cpp_info.libs = [ "conanlib" ]
         self.cpp_info.names["cmake_find_package"] = "conanlib"
-        self.cpp_info.names["cmake_find_package_multi"] = "arango"
+        self.cpp_info.names["cmake_find_package_multi"] = "conanlib"

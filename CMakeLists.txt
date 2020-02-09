@@ -4,7 +4,10 @@ cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 17)
 
 add_library(conanlib conanlib.cpp)
-target_include_directories(conanlib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(conanlib PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include>
+)
 
 install(
     DIRECTORY   include
@@ -12,7 +15,15 @@ install(
 )
 
 install(TARGETS conanlib
-    DESTINATION ${CMAKE_INSTALL_PREFIX}
+    EXPORT conanlib-targets
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
 )
 
-#add_subdirectory(test_package)
+#install(
+#    EXPORT conanlib-targets
+#    FILE conanlib-config.cmake
+#    NAMESPACE arango::
+#    DESTINATION ${CMAKE_INSTALL_PREFIX}
+#)
